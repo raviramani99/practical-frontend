@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-end p-4  ">
+    <button class="btn btn-primary btn-sm" (click)="logout()">Logout</button>
+</div>
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between p-4 align-items-center ">
+        <h2>Product List</h2>
+        <add-product-modal (productCreated)="onProductCreated()"></add-product-modal>
+    </div>
+
+    <div class="search-bar">
+        <form (submit)="onSearch()" class="d-flex align-items-center">
+            <div class="form-group mr-2">
+                <input type="text" id="name" class="form-control" [(ngModel)]="searchCriteria.search" name="name"
+                    placeholder="Search">
+            </div>
+
+            <div class="form-group mr-2">
+                <input type="date" id="startDate" class="form-control" [(ngModel)]="searchCriteria.startDate"
+                    name="startDate">
+            </div>
+
+            <div class="form-group mr-2">
+                <input type="date" id="endDate" class="form-control" [(ngModel)]="searchCriteria.endDate"
+                    name="endDate">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+    </div>
+
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of products">
+                <td>
+                    <img [src]="product.imageUrl" alt="product" width="50" height="50">
+                </td>
+                <td>{{ product.productName }}</td>
+                <td>{{ product.description }}</td>
+                <td>
+                    <add-product-modal (productCreated)="onProductCreated()"
+                        [productToEdit]=product></add-product-modal>
+                    <button class="btn btn-danger btn-sm" (click)="onDelete(product)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

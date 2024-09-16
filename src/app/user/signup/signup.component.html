@@ -1,0 +1,79 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h4>Sign Up</h4>
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+                        <!-- Full Name -->
+                        <div class="form-group mb-3">
+                            <label for="fullName">Full Name</label>
+                            <input type="text" id="fullName" class="form-control" formControlName="fullName"
+                                placeholder="Enter your full name" />
+                            <div *ngIf="signupForm.get('fullName')?.invalid && signupForm.get('fullName')?.touched"
+                                class="text-danger">
+                                Full name is required.
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="form-group mb-3">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" class="form-control" formControlName="email"
+                                placeholder="Enter your email" />
+                            <div *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched"
+                                class="text-danger">
+                                Please enter a valid email address.
+                            </div>
+                        </div>
+
+                        <!-- Phone Number -->
+                        <div class="form-group mb-3">
+                            <label for="phoneNumber">Phone Number</label>
+                            <input type="text" id="phoneNumber" class="form-control" formControlName="phoneNumber"
+                                placeholder="Enter your phone number" />
+                            <div *ngIf="signupForm.get('phoneNumber')?.invalid && signupForm.get('phoneNumber')?.touched"
+                                class="text-danger">
+                                Please enter a valid phone number.
+                            </div>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="form-group mb-3">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" class="form-control" formControlName="password"
+                                placeholder="Enter your password" />
+                            <div *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched"
+                                class="text-danger">
+                                Password must be at least 8 characters and contain 1 uppercase, 1 lowercase, 1 special
+                                character, and 1 number.
+                            </div>
+                        </div>
+
+                        <!-- Confirm Password -->
+                        <div class="form-group mb-3">
+                            <label for="confirmPassword">Confirm Password</label>
+                            <input type="password" id="confirmPassword" class="form-control"
+                                formControlName="confirmPassword" placeholder="Confirm your password" />
+                            <div *ngIf="signupForm.get('confirmPassword')?.invalid && signupForm.get('confirmPassword')?.touched"
+                                class="text-danger">
+                                Passwords do not match.
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="form-group text-center">
+                            <button type="submit" class="btn btn-primary">Sign Up</button>
+                            <!-- <button type="submit" class="btn btn-primary" [disabled]="signupForm?.invalid">Sign Up</button> -->
+                        </div>
+                    </form>
+                    <div *ngIf="errorMessage" class="text-danger text-center">
+                        {{ errorMessage }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

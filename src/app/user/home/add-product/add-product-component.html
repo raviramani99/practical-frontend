@@ -1,0 +1,48 @@
+<button *ngIf="!productToEdit" class="btn btn-lg btn-outline-primary" (click)="open()">Add Product</button>
+<button *ngIf="productToEdit" class="btn btn-sm btn-outline-primary mr-3" (click)="open()">Edit</button>
+
+<div *ngIf="isModalOpen" class="add-product-modal">
+    <div class="modal-content">
+        <div class="modal-header d-flex justify-content-between align-items-center">
+            <h5 class="modal-title">{{ isEditing ? 'Edit Product' : 'Add Product' }}</h5>
+            <div class="btn-close" (click)="close()"></div>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+                <!-- Product Name -->
+                <div class="form-group mb-3">
+                    <label for="productName">Product Name</label>
+                    <input type="text" id="productName" class="form-control" formControlName="productName"
+                        placeholder="Enter product name" />
+                    <div *ngIf="productForm.get('productName')?.invalid && productForm.get('productName')?.touched"
+                        class="text-danger">
+                        Product name is required.
+                    </div>
+                </div>
+
+                <!-- Product Description -->
+                <div class="form-group mb-3">
+                    <label for="description">Description</label>
+                    <textarea id="description" class="form-control" formControlName="description"
+                        placeholder="Enter product description"></textarea>
+                    <div *ngIf="productForm.get('description')?.invalid && productForm.get('description')?.touched"
+                        class="text-danger">
+                        Description must be between 10 and 200 characters.
+                    </div>
+                </div>
+
+                <!-- Product Image -->
+                <div class="form-group mb-3">
+                    <label for="image">Product Image</label>
+                    <input type="file" id="image" class="form-control" (change)="onImageSelected($event)" />
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-primary" [disabled]="productForm.invalid">
+                    {{ isEditing ? 'Update Product' : 'Add Product' }}
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+<div *ngIf="isModalOpen" class="add-product-modal-backdrop"></div>
